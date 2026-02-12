@@ -1,292 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Lusungulo Fresh Broilers - PWA</title>
-    <meta name="theme-color" content="#2e7d32">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- SweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐔 Lusungulo - Fresh Broilers</title>
     <style>
-        /* ============ GLOBAL STYLES ============ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: Arial, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 15px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            padding: 20px;
         }
         
         .app {
             max-width: 500px;
-            width: 100%;
             margin: 0 auto;
             background: white;
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-            position: relative;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
         
-        /* ============ HEADER ============ */
-        .header {
-            background: linear-gradient(135deg, #2e7d32, #1b5e20);
-            color: white;
-            padding: 25px 20px;
+        h1 {
+            color: #2e7d32;
             text-align: center;
+            margin-bottom: 10px;
         }
         
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .stock-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 8px 15px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-top: 10px;
-            font-size: 14px;
+        .stock-box {
+            background: #4caf50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 24px;
             font-weight: bold;
-            backdrop-filter: blur(5px);
+            margin-bottom: 20px;
         }
         
-        /* ============ SPECIAL DEAL ============ */
-        .special-deal {
+        .deal {
             background: linear-gradient(45deg, #ff6b6b, #ff8e53);
             color: white;
-            padding: 15px;
+            padding: 12px;
+            border-radius: 10px;
             text-align: center;
+            margin-bottom: 20px;
             font-weight: bold;
-            font-size: 16px;
-            animation: pulse 2s infinite;
-            margin: 15px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(255,107,107,0.3);
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-        
-        /* ============ CONTENT SECTIONS ============ */
-        .section {
-            padding: 20px;
-        }
-        
-        /* ============ FORM ELEMENTS ============ */
-        input, select, textarea {
+        input, select {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             margin: 8px 0;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
             font-size: 16px;
-            transition: all 0.3s;
-            background: white;
-        }
-        
-        input:focus, select:focus, textarea:focus {
-            border-color: #2e7d32;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
         }
         
         button {
             width: 100%;
-            padding: 16px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 12px;
+            padding: 14px;
             background: #2e7d32;
             color: white;
+            border: none;
+            border-radius: 8px;
             font-size: 18px;
             font-weight: bold;
+            margin: 10px 0;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
         
         button:hover {
             background: #1b5e20;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(46,125,50,0.3);
         }
         
-        .btn-warning {
-            background: #ff9800;
+        .admin-btn {
+            background: #757575;
         }
         
-        .btn-warning:hover {
-            background: #f57c00;
-        }
-        
-        .btn-danger {
-            background: #f44336;
-        }
-        
-        .btn-danger:hover {
-            background: #d32f2f;
-        }
-        
-        .btn-info {
-            background: #2196f3;
-        }
-        
-        .btn-info:hover {
-            background: #1976d2;
-        }
-        
-        /* ============ STOCK CARDS ============ */
-        .stock-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
-            margin: 20px 0;
-        }
-        
-        .stock-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            padding: 15px;
-            border: 2px solid #f5f5f5;
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .stock-card:hover {
-            transform: translateY(-5px);
-            border-color: #2e7d32;
-        }
-        
-        .stock-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 10px;
-        }
-        
-        .stock-card h4 {
-            color: #2e7d32;
-            margin: 10px 0;
-        }
-        
-        .stock-card p {
-            color: #ff9800;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        
-        .stock-indicator {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 5px 12px;
-            border-radius: 50px;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        .in-stock { background: #4caf50; }
-        .low-stock { background: #ff9800; }
-        .out-stock { background: #f44336; }
-        
-        /* ============ PRICE BOX ============ */
-        .price-box {
-            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-            padding: 20px;
-            border-radius: 16px;
-            margin: 20px 0;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: #e65100;
-            border: 2px solid #ff9800;
-        }
-        
-        /* ============ TABS ============ */
-        .tabs {
-            display: flex;
-            background: #f5f5f5;
-            padding: 5px;
-            border-radius: 50px;
-            margin: 20px;
-        }
-        
-        .tab {
-            flex: 1;
-            padding: 12px;
-            text-align: center;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .tab.active {
-            background: #2e7d32;
-            color: white;
-        }
-        
-        /* ============ ADMIN SECTION ============ */
         .admin-section {
             background: #f5f5f5;
-            border-radius: 16px;
             padding: 20px;
-            margin: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
             display: none;
         }
         
-        .stock-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .price-box {
+            background: #fff3e0;
             padding: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .stock-controls {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .stock-controls button {
-            width: 40px;
-            height: 40px;
-            padding: 0;
-            margin: 0;
             border-radius: 8px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff9800;
+            margin: 20px 0;
         }
         
-        /* ============ MODALS ============ */
         .modal {
             display: none;
             position: fixed;
@@ -294,967 +109,249 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             align-items: center;
             justify-content: center;
-            z-index: 1000;
         }
         
         .modal-content {
             background: white;
             padding: 30px;
-            border-radius: 25px;
-            max-width: 400px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        /* ============ RESPONSIVE ============ */
-        @media (max-width: 480px) {
-            body { padding: 10px; }
-            .stock-grid { grid-template-columns: 1fr; }
+            border-radius: 15px;
+            max-width: 350px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
     <div class="app">
-        <!-- ============ HEADER ============ -->
-        <div class="header">
-            <h1>
-                <i class="fas fa-drumstick-bite"></i>
-                Lusungulo
-            </h1>
-            <p>Fresh Broilers • Delivered Fresh</p>
-            <div class="stock-badge" id="totalStockDisplay">
-                <i class="fas fa-chicken"></i> Loading stock...
-            </div>
+        <h1>🐔 LUSUNGULO</h1>
+        <p style="text-align: center; color: #666;">Fresh Broilers - No Firebase!</p>
+        
+        <div class="deal">
+            🎉 BUY 2 MEDIUM, GET 1 SMALL FREE! 🎉
         </div>
         
-        <!-- ============ SPECIAL DEAL ============ -->
-        <div class="special-deal">
-            <i class="fas fa-tag"></i>
-            SPECIAL: Buy 2 Medium, Get 1 Small FREE!
-            <i class="fas fa-tag"></i>
+        <div class="stock-box" id="stockDisplay">
+            🐔 Loading...
         </div>
         
-        <!-- ============ TABS ============ -->
-        <div class="tabs">
-            <div class="tab active" onclick="switchTab('order')">
-                <i class="fas fa-shopping-cart"></i> Order
-            </div>
-            <div class="tab" onclick="switchTab('track')">
-                <i class="fas fa-map-marker-alt"></i> Track
-            </div>
-            <div class="tab" onclick="switchTab('reviews')">
-                <i class="fas fa-star"></i> Reviews
-            </div>
+        <h3>📝 Place Order</h3>
+        
+        <input type="text" id="name" placeholder="Full Name">
+        <input type="tel" id="phone" placeholder="Phone Number">
+        <input type="text" id="address" placeholder="Delivery Address">
+        
+        <select id="size">
+            <option value="">-- Select Size --</option>
+            <option value="1.5">Small (1.5kg) - E67.50</option>
+            <option value="2.0">Medium (2.0kg) - E90.00</option>
+            <option value="2.5">Large (2.5kg) - E112.50</option>
+        </select>
+        
+        <input type="number" id="quantity" value="1" min="1">
+        
+        <div class="price-box" id="totalPrice">
+            Total: E0.00
         </div>
         
-        <!-- ============ ORDER TAB ============ -->
-        <div id="orderTab" style="display: block;">
-            <div class="section">
-                <!-- Customer Info -->
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                    <i class="fas fa-user" style="color: #2e7d32;"></i>
-                    <input type="text" id="name" placeholder="Full Name" style="flex: 1;">
-                </div>
-                
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                    <i class="fas fa-phone" style="color: #2e7d32;"></i>
-                    <input type="tel" id="phone" placeholder="Phone Number" style="flex: 1;">
-                </div>
-                
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                    <i class="fas fa-id-card" style="color: #2e7d32;"></i>
-                    <input type="text" id="idNumber" placeholder="National ID Number" style="flex: 1;">
-                </div>
-                
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                    <i class="fas fa-map-marker-alt" style="color: #2e7d32;"></i>
-                    <input type="text" id="address" placeholder="Delivery Address" style="flex: 1;">
-                </div>
-                
-                <!-- Stock Display -->
-                <h3 style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                    <i class="fas fa-boxes"></i>
-                    Available Stock
-                </h3>
-                <div id="stockDisplay" class="stock-grid"></div>
-                
-                <!-- Size Selection (Hidden) -->
-                <select id="sizeSelect" style="display: none;">
-                    <option value="1.5">1.5 kg</option>
-                    <option value="2.0">2.0 kg</option>
-                    <option value="2.5">2.5 kg</option>
-                </select>
-                
-                <!-- Quantity -->
-                <div style="display: flex; align-items: center; gap: 10px; margin: 20px 0;">
-                    <i class="fas fa-sort-amount-up" style="color: #2e7d32;"></i>
-                    <input type="number" id="quantity" value="1" min="1" style="flex: 1;">
-                </div>
-                
-                <!-- Chicken Type -->
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                    <i class="fas fa-utensils" style="color: #2e7d32;"></i>
-                    <select id="typeSelect" style="flex: 1;">
-                        <option value="full">Full Chicken</option>
-                        <option value="cut">Cut Pieces</option>
-                    </select>
-                </div>
-                
-                <!-- Service Options (Full Chicken Only) -->
-                <div id="serviceSection" style="display: none;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                        <i class="fas fa-concierge-bell" style="color: #2e7d32;"></i>
-                        <select id="serviceSelect" style="flex: 1;">
-                            <option value="0">No Service</option>
-                            <option value="5">Ready to Cook (+E5)</option>
-                            <option value="10">Curry Cut (+E10)</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <!-- Payment Method -->
-                <h3 style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                    <i class="fas fa-credit-card"></i>
-                    Payment Method
-                </h3>
-                
-                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-                    <div id="momoOption" onclick="selectPayment('momo')" style="flex: 1; border: 2px solid #ddd; border-radius: 12px; padding: 15px; text-align: center; cursor: pointer;" class="payment-option">
-                        <i class="fas fa-mobile-alt" style="font-size: 24px; color: #2e7d32;"></i>
-                        <div style="font-weight: bold; margin-top: 5px;">MoMo</div>
-                        <small>Pay E50 deposit</small>
-                    </div>
-                    
-                    <div id="cashOption" onclick="selectPayment('cash')" style="flex: 1; border: 2px solid #ddd; border-radius: 12px; padding: 15px; text-align: center; cursor: pointer;" class="payment-option">
-                        <i class="fas fa-money-bill-wave" style="font-size: 24px; color: #2e7d32;"></i>
-                        <div style="font-weight: bold; margin-top: 5px;">Cash</div>
-                        <small>Pay on delivery</small>
-                    </div>
-                </div>
-                
-                <!-- MoMo Fields -->
-                <div id="momoFields">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <i class="fas fa-calendar" style="color: #2e7d32;"></i>
-                        <input type="date" id="payDate" style="flex: 1;">
-                    </div>
-                    
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <i class="fas fa-clock" style="color: #2e7d32;"></i>
-                        <input type="time" id="payTime" style="flex: 1;">
-                    </div>
-                    
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                        <i class="fas fa-user" style="color: #2e7d32;"></i>
-                        <input type="text" id="momoName" placeholder="Your MoMo Registered Name" style="flex: 1;">
-                    </div>
-                </div>
-                
-                <!-- Cash Fields -->
-                <div id="cashFields" style="display: none;">
-                    <div style="background: #e8f5e9; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
-                        <i class="fas fa-info-circle" style="color: #2e7d32;"></i>
-                        Pay full amount when your order arrives
-                    </div>
-                </div>
-                
-                <!-- Total Price -->
-                <div class="price-box">
-                    <div style="font-size: 14px; color: #666;">Total Amount</div>
-                    <div id="totalPrice">E0.00</div>
-                </div>
-                
-                <!-- Order Button -->
-                <button onclick="placeOrder()">
-                    <i class="fas fa-check-circle"></i>
-                    PLACE ORDER
-                </button>
-            </div>
-        </div>
+        <button onclick="placeOrder()">📱 PLACE ORDER</button>
+        <button onclick="showAdminLogin()" class="admin-btn">👑 ADMIN LOGIN</button>
         
-        <!-- ============ TRACK TAB ============ -->
-        <div id="trackTab" style="display: none;">
-            <div class="section">
-                <h3 style="margin-bottom: 20px;">
-                    <i class="fas fa-search"></i>
-                    Track Your Order
-                </h3>
-                
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                    <i class="fas fa-phone" style="color: #2e7d32;"></i>
-                    <input type="tel" id="trackPhone" placeholder="Enter your phone number" style="flex: 1;">
-                </div>
-                
-                <button onclick="trackOrder()">
-                    <i class="fas fa-search-location"></i>
-                    TRACK ORDER
-                </button>
-                
-                <div id="trackingResult" style="margin-top: 20px;"></div>
-            </div>
-        </div>
-        
-        <!-- ============ REVIEWS TAB ============ -->
-        <div id="reviewsTab" style="display: none;">
-            <div class="section">
-                <h3 style="margin-bottom: 20px;">
-                    <i class="fas fa-star"></i>
-                    Customer Reviews
-                </h3>
-                
-                <div id="reviewsList"></div>
-            </div>
-        </div>
-        
-        <!-- ============ ADMIN LOGIN BUTTON ============ -->
-        <div style="padding: 20px; text-align: center;">
-            <button onclick="showAdminLogin()" style="background: #757575; width: auto; display: inline-block; padding: 10px 25px;">
-                <i class="fas fa-lock"></i>
-                Admin Login
-            </button>
-        </div>
-        
-        <!-- ============ ADMIN SECTION ============ -->
         <div id="adminSection" class="admin-section">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h3 style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-crown" style="color: #ff9800;"></i>
-                    Admin Panel
-                </h3>
-                <button onclick="logoutAdmin()" style="width: auto; padding: 8px 20px; background: #f44336;">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
-                </button>
-            </div>
+            <h3>👑 Admin Panel</h3>
+            <button onclick="logoutAdmin()" style="background: #f44336;">Logout</button>
             
-            <!-- Stock Management -->
-            <h4 style="margin-bottom: 15px;">
-                <i class="fas fa-boxes"></i>
-                Manage Inventory
-            </h4>
-            <div id="adminStockList"></div>
+            <h4>📦 Current Stock</h4>
+            <div id="adminStock"></div>
             
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button onclick="showAddStockModal()" style="flex: 1; background: #4caf50;">
-                    <i class="fas fa-plus-circle"></i>
-                    Add Stock
-                </button>
-                <button onclick="showAdjustStockModal()" style="flex: 1; background: #ff9800;">
-                    <i class="fas fa-edit"></i>
-                    Adjust Stock
-                </button>
-            </div>
-            
-            <!-- Order Management -->
-            <h4 style="margin: 30px 0 15px 0;">
-                <i class="fas fa-clipboard-list"></i>
-                All Orders
-            </h4>
-            <div id="adminOrdersList"></div>
-        </div>
-    </div>
-    
-    <!-- ============ ADD STOCK MODAL ============ -->
-    <div id="addStockModal" class="modal">
-        <div class="modal-content">
-            <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-plus-circle" style="color: #4caf50;"></i>
-                Add New Batch
-            </h3>
-            
-            <select id="addStockSize" style="margin-bottom: 15px;">
-                <option value="1.5">Small (1.5 kg)</option>
-                <option value="2.0">Medium (2.0 kg)</option>
-                <option value="2.5">Large (2.5 kg)</option>
+            <h4>➕ Add Stock</h4>
+            <select id="addSize">
+                <option value="1.5">Small (1.5kg)</option>
+                <option value="2.0">Medium (2.0kg)</option>
+                <option value="2.5">Large (2.5kg)</option>
             </select>
+            <input type="number" id="addQty" placeholder="Quantity">
+            <button onclick="addStock()" style="background: #4caf50;">Add Stock</button>
             
-            <input type="number" id="addStockQuantity" placeholder="Quantity to Add" min="1" style="margin-bottom: 15px;">
-            
-            <input type="number" id="addStockPrice" placeholder="Price per kg (E)" value="45" style="margin-bottom: 15px;">
-            
-            <div style="display: flex; gap: 10px;">
-                <button onclick="addStock()" style="flex: 1; background: #4caf50;">
-                    <i class="fas fa-save"></i>
-                    Save
-                </button>
-                <button onclick="closeModal('addStockModal')" style="flex: 1; background: #f44336;">
-                    <i class="fas fa-times"></i>
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ============ ADJUST STOCK MODAL ============ -->
-    <div id="adjustStockModal" class="modal">
-        <div class="modal-content">
-            <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-edit" style="color: #ff9800;"></i>
-                Adjust Stock
-            </h3>
-            
-            <select id="adjustStockSize" style="margin-bottom: 20px;">
-                <option value="1.5">Small (1.5 kg)</option>
-                <option value="2.0">Medium (2.0 kg)</option>
-                <option value="2.5">Large (2.5 kg)</option>
+            <h4>✏️ Adjust Stock</h4>
+            <select id="adjustSize">
+                <option value="1.5">Small (1.5kg)</option>
+                <option value="2.0">Medium (2.0kg)</option>
+                <option value="2.5">Large (2.5kg)</option>
             </select>
-            
-            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                <button onclick="adjustStock(-1)" class="btn-warning" style="flex: 1;">-1</button>
-                <button onclick="adjustStock(-5)" class="btn-warning" style="flex: 1;">-5</button>
-                <button onclick="adjustStock(-10)" class="btn-warning" style="flex: 1;">-10</button>
+            <div style="display: flex; gap: 5px;">
+                <button onclick="adjustStock(-1)" style="background: #ff9800;">-1</button>
+                <button onclick="adjustStock(-5)" style="background: #ff9800;">-5</button>
+                <button onclick="adjustStock(1)" style="background: #4caf50;">+1</button>
+                <button onclick="adjustStock(5)" style="background: #4caf50;">+5</button>
             </div>
             
-            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                <button onclick="adjustStock(1)" class="btn-success" style="flex: 1; background: #4caf50;">+1</button>
-                <button onclick="adjustStock(5)" class="btn-success" style="flex: 1; background: #4caf50;">+5</button>
-                <button onclick="adjustStock(10)" class="btn-success" style="flex: 1; background: #4caf50;">+10</button>
-            </div>
-            
-            <div style="display: flex; gap: 10px;">
-                <input type="number" id="customAdjust" placeholder="Custom quantity" min="1" style="flex: 1;">
-                <button onclick="adjustStock(0)" style="background: #2196f3; width: auto; padding: 15px 20px;">
-                    Apply
-                </button>
-            </div>
-            
-            <button onclick="closeModal('adjustStockModal')" style="margin-top: 20px; background: #f44336;">
-                <i class="fas fa-times"></i>
-                Close
-            </button>
+            <h4>📋 Recent Orders</h4>
+            <div id="ordersList"></div>
         </div>
     </div>
     
-    <!-- ============ ADMIN LOGIN MODAL ============ -->
-    <div id="adminLoginModal" class="modal">
+    <div id="loginModal" class="modal">
         <div class="modal-content">
-            <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-lock" style="color: #2e7d32;"></i>
-                Admin Login
-            </h3>
-            
-            <input type="password" id="adminPassword" placeholder="Enter password" style="margin-bottom: 20px;">
-            
-            <div style="display: flex; gap: 10px;">
-                <button onclick="verifyAdmin()" style="flex: 1; background: #2e7d32;">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Login
-                </button>
-                <button onclick="closeModal('adminLoginModal')" style="flex: 1; background: #f44336;">
-                    <i class="fas fa-times"></i>
-                    Cancel
-                </button>
-            </div>
-            
-            <p style="text-align: center; margin-top: 15px; color: #666; font-size: 12px;">
-                Default password: admin123
-            </p>
+            <h3>Admin Login</h3>
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="verifyAdmin()">Login</button>
+            <button onclick="closeModal()" style="background: #f44336;">Cancel</button>
+            <p style="margin-top: 10px;">Password: admin123</p>
         </div>
     </div>
-    
-    <!-- ============ RATING MODAL ============ -->
-    <div id="ratingModal" class="modal">
-        <div class="modal-content">
-            <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-star" style="color: #ff9800;"></i>
-                Rate Your Order
-            </h3>
-            
-            <div id="ratingOrderDetails" style="margin-bottom: 20px; padding: 15px; background: #f5f5f5; border-radius: 12px;"></div>
-            
-            <div style="display: flex; justify-content: center; gap: 5px; margin-bottom: 20px; font-size: 30px;">
-                <span onclick="setRating(5)" style="cursor: pointer; color: #ddd;" id="star5">★</span>
-                <span onclick="setRating(4)" style="cursor: pointer; color: #ddd;" id="star4">★</span>
-                <span onclick="setRating(3)" style="cursor: pointer; color: #ddd;" id="star3">★</span>
-                <span onclick="setRating(2)" style="cursor: pointer; color: #ddd;" id="star2">★</span>
-                <span onclick="setRating(1)" style="cursor: pointer; color: #ddd;" id="star1">★</span>
-            </div>
-            
-            <textarea id="reviewText" placeholder="Write your review..." rows="4" style="margin-bottom: 20px;"></textarea>
-            
-            <div style="display: flex; gap: 10px;">
-                <button onclick="submitRating()" style="flex: 1; background: #4caf50;">
-                    <i class="fas fa-check"></i>
-                    Submit Review
-                </button>
-                <button onclick="closeModal('ratingModal')" style="flex: 1; background: #f44336;">
-                    <i class="fas fa-times"></i>
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ============ CONFIRM DELIVERY MODAL ============ -->
-    <div id="confirmModal" class="modal">
-        <div class="modal-content">
-            <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-check-circle" style="color: #4caf50;"></i>
-                Confirm Delivery
-            </h3>
-            
-            <p style="margin-bottom: 20px;">Have you received your order?</p>
-            
-            <div id="confirmOrderDetails" style="margin-bottom: 20px; padding: 15px; background: #f5f5f5; border-radius: 12px;"></div>
-            
-            <div style="display: flex; gap: 10px;">
-                <button onclick="confirmDelivery()" style="flex: 1; background: #4caf50;">
-                    <i class="fas fa-check"></i>
-                    Yes, Received
-                </button>
-                <button onclick="closeModal('confirmModal')" style="flex: 1; background: #f44336;">
-                    <i class="fas fa-times"></i>
-                    Not Yet
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ============ FIREBASE SDK ============ -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    
+
     <script>
-        // ============ FIREBASE CONFIGURATION ============
-        const firebaseConfig = {
-            apiKey: "AIzaSyCXJeodZbNeGyLfJgQrqYriJVdgi-GOA1o",
-            authDomain: "lusungulo-3a422.firebaseapp.com",
-            databaseURL: "https://lusungulo-3a422-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "lusungulo-3a422",
-            storageBucket: "lusungulo-3a422.firebasestorage.app",
-            messagingSenderId: "644814725574",
-            appId: "1:644814725574:web:cfbaa03a1ee7ba7e1e7ac7",
-            measurementId: "G-E25HW7HNZ6"
+        // ============ NO FIREBASE! ALL DATA STORED LOCALLY ============
+        
+        // Initialize stock data
+        let stock = {
+            '1.5': { quantity: 50, price: 45 },
+            '2.0': { quantity: 35, price: 45 },
+            '2.5': { quantity: 20, price: 45 }
         };
         
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
+        let orders = [];
+        let currentPayment = 'momo';
         
-        // ============ GLOBAL VARIABLES ============
-        const ADMIN_PASSWORD = "admin123";
-        const WHATSAPP_NUMBER = "26876123456"; // CHANGE THIS TO YOUR NUMBER
-        let currentRatingOrderId = null;
-        let currentRating = 0;
-        let currentConfirmOrderId = null;
-        
-        // ============ INITIALIZATION ============
-        window.onload = function() {
-            console.log("App started!");
-            initializeStock();
-            loadStock();
-            setDefaultDates();
-            selectPayment('momo');
-        };
-        
-        // Initialize default stock if empty
-        function initializeStock() {
-            db.ref("stock").once("value", snapshot => {
-                if (!snapshot.exists()) {
-                    const defaultStock = {
-                        "1.5": { quantity: 50, price: 45, lastUpdated: new Date().toISOString() },
-                        "2.0": { quantity: 35, price: 45, lastUpdated: new Date().toISOString() },
-                        "2.5": { quantity: 20, price: 45, lastUpdated: new Date().toISOString() }
-                    };
-                    db.ref("stock").set(defaultStock);
-                    console.log("Default stock initialized");
-                }
-            });
+        // Load saved data
+        function loadData() {
+            const savedStock = localStorage.getItem('lusungulo_stock');
+            if (savedStock) {
+                stock = JSON.parse(savedStock);
+            }
+            
+            const savedOrders = localStorage.getItem('lusungulo_orders');
+            if (savedOrders) {
+                orders = JSON.parse(savedOrders);
+            }
+            
+            updateStockDisplay();
         }
         
-        // ============ STOCK MANAGEMENT ============
-        function loadStock() {
-            db.ref("stock").on("value", snapshot => {
-                const stock = snapshot.val() || {};
-                displayStockToCustomers(stock);
-                displayStockToAdmin(stock);
-                updateTotalBirds(stock);
-            });
+        // Save data
+        function saveData() {
+            localStorage.setItem('lusungulo_stock', JSON.stringify(stock));
+            localStorage.setItem('lusungulo_orders', JSON.stringify(orders));
         }
         
-        function displayStockToCustomers(stock) {
-            let html = '';
-            let totalBirds = 0;
+        // Update stock display
+        function updateStockDisplay() {
+            let total = 0;
+            total += stock['1.5'].quantity;
+            total += stock['2.0'].quantity;
+            total += stock['2.5'].quantity;
             
-            const sizes = [
-                { weight: '1.5', name: 'Small', image: 'https://images.unsplash.com/photo-1604908177524-9f409a8b3d95?w=400' },
-                { weight: '2.0', name: 'Medium', image: 'https://images.unsplash.com/photo-1601050692362-9f90f13ee824?w=400' },
-                { weight: '2.5', name: 'Large', image: 'https://images.unsplash.com/photo-1604908177524-9f409a8b3d95?w=400' }
-            ];
+            document.getElementById('stockDisplay').innerHTML = `🐔 Available Birds: ${total}`;
             
-            sizes.forEach(size => {
-                const item = stock[size.weight] || { quantity: 0, price: 45 };
-                totalBirds += parseInt(item.quantity) || 0;
-                
-                let stockClass = 'in-stock';
-                let stockText = `${item.quantity || 0} available`;
-                
-                if (item.quantity <= 0) {
-                    stockClass = 'out-stock';
-                    stockText = 'Out of Stock';
-                } else if (item.quantity <= 10) {
-                    stockClass = 'low-stock';
-                    stockText = `Only ${item.quantity} left!`;
-                }
-                
-                const price = (parseFloat(size.weight) * (item.price || 45)).toFixed(2);
-                
-                html += `
-                    <div class="stock-card" onclick="selectSize('${size.weight}')">
-                        <div class="stock-indicator ${stockClass}">${stockText}</div>
-                        <img src="${size.image}" alt="${size.name} Chicken">
-                        <h4>${size.name} (${size.weight}kg)</h4>
-                        <p>E${price}</p>
-                    </div>
-                `;
-            });
-            
-            document.getElementById('stockDisplay').innerHTML = html;
-            document.getElementById('totalStockDisplay').innerHTML = `<i class="fas fa-chicken"></i> Total Birds: ${totalBirds}`;
-        }
-        
-        function displayStockToAdmin(stock) {
+            // Admin stock view
             if (document.getElementById('adminSection').style.display === 'block') {
                 let html = '';
-                
-                ['1.5', '2.0', '2.5'].forEach(weight => {
-                    const item = stock[weight] || { quantity: 0, price: 45 };
-                    html += `
-                        <div class="stock-item">
-                            <div>
-                                <strong>${weight}kg</strong><br>
-                                <small>Price: E${item.price}/kg</small>
-                            </div>
-                            <div style="font-size: 20px; font-weight: bold;">${item.quantity || 0}</div>
-                            <div class="stock-controls">
-                                <button onclick="quickAdjust('${weight}', -1)" style="background: #ff9800;">-1</button>
-                                <button onclick="quickAdjust('${weight}', 1)" style="background: #4caf50;">+1</button>
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                document.getElementById('adminStockList').innerHTML = html;
+                html += `<div style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ddd;">
+                            <span><strong>1.5kg</strong> (E${stock['1.5'].price}/kg)</span>
+                            <span style="font-size: 20px;">${stock['1.5'].quantity}</span>
+                        </div>`;
+                html += `<div style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ddd;">
+                            <span><strong>2.0kg</strong> (E${stock['2.0'].price}/kg)</span>
+                            <span style="font-size: 20px;">${stock['2.0'].quantity}</span>
+                        </div>`;
+                html += `<div style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ddd;">
+                            <span><strong>2.5kg</strong> (E${stock['2.5'].price}/kg)</span>
+                            <span style="font-size: 20px;">${stock['2.5'].quantity}</span>
+                        </div>`;
+                document.getElementById('adminStock').innerHTML = html;
             }
-        }
-        
-        function updateTotalBirds(stock) {
-            let total = 0;
-            ['1.5', '2.0', '2.5'].forEach(weight => {
-                total += parseInt(stock[weight]?.quantity || 0);
-            });
-            document.getElementById('totalStockDisplay').innerHTML = `<i class="fas fa-chicken"></i> Total Birds: ${total}`;
-        }
-        
-        function selectSize(weight) {
-            document.getElementById('sizeSelect').value = weight;
+            
             updatePrice();
-            document.getElementById('orderTab').scrollIntoView({ behavior: 'smooth' });
         }
         
+        // Update price
         function updatePrice() {
-            const weight = parseFloat(document.getElementById('sizeSelect').value) || 0;
+            const size = document.getElementById('size').value;
             const qty = parseInt(document.getElementById('quantity').value) || 1;
-            const service = parseInt(document.getElementById('serviceSelect').value) || 0;
             
-            db.ref(`stock/${weight}`).once("value", snapshot => {
-                const stock = snapshot.val() || { price: 45 };
-                const pricePerKg = stock.price || 45;
-                const total = (weight * pricePerKg * qty) + (service * qty);
-                document.getElementById('totalPrice').innerHTML = `E${total.toFixed(2)}`;
-            });
-        }
-        
-        // ============ ADMIN STOCK FUNCTIONS ============
-        function quickAdjust(weight, change) {
-            db.ref(`stock/${weight}`).once("value", snapshot => {
-                const current = snapshot.val() || { quantity: 0, price: 45 };
-                const newQuantity = Math.max(0, (current.quantity || 0) + change);
-                
-                db.ref(`stock/${weight}`).update({
-                    quantity: newQuantity,
-                    lastUpdated: new Date().toISOString()
-                }).then(() => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Stock Updated',
-                        text: `${weight}kg: ${newQuantity} birds`,
-                        timer: 1500,
-                        showConfirmButton: false,
-                        position: 'top-end',
-                        toast: true
-                    });
-                });
-            });
-        }
-        
-        function showAddStockModal() {
-            document.getElementById('addStockModal').style.display = 'flex';
-        }
-        
-        function addStock() {
-            const weight = document.getElementById('addStockSize').value;
-            const quantity = parseInt(document.getElementById('addStockQuantity').value);
-            const price = parseFloat(document.getElementById('addStockPrice').value);
-            
-            if (!quantity || quantity < 1) {
-                Swal.fire('Error', 'Please enter valid quantity', 'error');
+            if (!size || !stock[size]) {
+                document.getElementById('totalPrice').innerHTML = 'Total: E0.00';
                 return;
             }
             
-            db.ref(`stock/${weight}`).once("value", snapshot => {
-                const current = snapshot.val() || { quantity: 0, price: 45 };
-                const newQuantity = (current.quantity || 0) + quantity;
-                
-                db.ref(`stock/${weight}`).set({
-                    quantity: newQuantity,
-                    price: price,
-                    lastUpdated: new Date().toISOString()
-                }).then(() => {
-                    Swal.fire('Success', `Added ${quantity} birds to ${weight}kg batch`, 'success');
-                    closeModal('addStockModal');
-                    document.getElementById('addStockQuantity').value = '';
-                });
-            });
+            const total = parseFloat(size) * stock[size].price * qty;
+            document.getElementById('totalPrice').innerHTML = `Total: E${total.toFixed(2)}`;
         }
         
-        function showAdjustStockModal() {
-            document.getElementById('adjustStockModal').style.display = 'flex';
-        }
-        
-        function adjustStock(change) {
-            const weight = document.getElementById('adjustStockSize').value;
-            
-            if (change === 0) {
-                const custom = parseInt(document.getElementById('customAdjust').value);
-                if (!custom || custom < 1) {
-                    Swal.fire('Error', 'Please enter valid quantity', 'error');
-                    return;
-                }
-                change = custom;
-            }
-            
-            db.ref(`stock/${weight}`).once("value", snapshot => {
-                const current = snapshot.val() || { quantity: 0, price: 45 };
-                const newQuantity = Math.max(0, (current.quantity || 0) + change);
-                
-                db.ref(`stock/${weight}`).update({
-                    quantity: newQuantity,
-                    lastUpdated: new Date().toISOString()
-                }).then(() => {
-                    Swal.fire('Success', `Stock adjusted to ${newQuantity} birds`, 'success');
-                    closeModal('adjustStockModal');
-                    document.getElementById('customAdjust').value = '';
-                });
-            });
-        }
-        
-        // ============ ORDER FUNCTIONS ============
+        // Place order
         function placeOrder() {
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
-            const idNumber = document.getElementById('idNumber').value;
             const address = document.getElementById('address').value;
-            const weight = document.getElementById('sizeSelect').value;
+            const size = document.getElementById('size').value;
             const qty = parseInt(document.getElementById('quantity').value);
-            const type = document.getElementById('typeSelect').value;
-            const service = parseInt(document.getElementById('serviceSelect').value) || 0;
-            const paymentMethod = document.querySelector('.payment-option.selected')?.id === 'momoOption' ? 'momo' : 'cash';
-            const momoName = document.getElementById('momoName').value;
-            const payDate = document.getElementById('payDate').value;
-            const payTime = document.getElementById('payTime').value;
             
-            if (!name || !phone || !address || !weight) {
-                Swal.fire('Error', 'Please fill all required fields', 'error');
+            if (!name || !phone || !address || !size) {
+                alert('Please fill all fields');
                 return;
             }
             
-            if (paymentMethod === 'momo' && !momoName) {
-                Swal.fire('Error', 'Please enter your MoMo registered name', 'error');
+            if (!stock[size] || stock[size].quantity < qty) {
+                alert(`Only ${stock[size]?.quantity || 0} birds available`);
                 return;
             }
             
-            db.ref(`stock/${weight}`).once("value", snapshot => {
-                const stock = snapshot.val() || { quantity: 0, price: 45 };
-                
-                if (stock.quantity < qty) {
-                    Swal.fire('Sorry', `Only ${stock.quantity} birds available`, 'error');
-                    return;
-                }
-                
-                const total = (parseFloat(weight) * (stock.price || 45) * qty) + (service * qty);
-                const trackingNumber = 'LS' + Date.now().toString().slice(-8);
-                
-                const order = {
-                    name, phone, idNumber, address,
-                    weight, qty, type, service,
-                    paymentMethod, momoName, payDate, payTime,
-                    total: total.toFixed(2),
-                    trackingNumber,
-                    status: 'pending',
-                    statusHistory: [{
-                        status: 'pending',
-                        timestamp: new Date().toISOString(),
-                        note: 'Order received'
-                    }],
-                    timestamp: new Date().toISOString()
-                };
-                
-                db.ref('orders').push(order).then(() => {
-                    // Update stock
-                    db.ref(`stock/${weight}`).update({
-                        quantity: stock.quantity - qty,
-                        lastUpdated: new Date().toISOString()
-                    });
-                    
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Order Placed!',
-                        text: `Tracking #: ${trackingNumber}`,
-                        confirmButtonText: 'OK'
-                    });
-                    
-                    // Clear form
-                    document.getElementById('name').value = '';
-                    document.getElementById('phone').value = '';
-                    document.getElementById('idNumber').value = '';
-                    document.getElementById('address').value = '';
-                    document.getElementById('quantity').value = '1';
-                    setDefaultDates();
-                    
-                }).catch(error => {
-                    Swal.fire('Error', 'Failed to place order', 'error');
-                });
-            });
-        }
-        
-        // ============ PAYMENT FUNCTIONS ============
-        function selectPayment(method) {
-            const momoOption = document.getElementById('momoOption');
-            const cashOption = document.getElementById('cashOption');
-            const momoFields = document.getElementById('momoFields');
-            const cashFields = document.getElementById('cashFields');
+            const total = parseFloat(size) * stock[size].price * qty;
+            const tracking = 'LS' + Date.now().toString().slice(-8);
             
-            momoOption.style.borderColor = '#ddd';
-            cashOption.style.borderColor = '#ddd';
-            momoOption.classList.remove('selected');
-            cashOption.classList.remove('selected');
+            // Update stock
+            stock[size].quantity -= qty;
             
-            if (method === 'momo') {
-                momoOption.style.borderColor = '#2e7d32';
-                momoOption.style.background = '#e8f5e9';
-                momoOption.classList.add('selected');
-                momoFields.style.display = 'block';
-                cashFields.style.display = 'none';
-            } else {
-                cashOption.style.borderColor = '#2e7d32';
-                cashOption.style.background = '#e8f5e9';
-                cashOption.classList.add('selected');
-                momoFields.style.display = 'none';
-                cashFields.style.display = 'block';
+            // Save order
+            const order = {
+                name, phone, address,
+                size, qty,
+                total: total.toFixed(2),
+                tracking,
+                status: 'pending',
+                timestamp: new Date().toLocaleString()
+            };
+            
+            orders.unshift(order);
+            saveData();
+            updateStockDisplay();
+            
+            alert(`✅ Order placed! Tracking: ${tracking}`);
+            
+            // Clear form
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('address').value = '';
+            document.getElementById('quantity').value = '1';
+            document.getElementById('size').value = '';
+            updatePrice();
+            
+            // Update orders list if admin is logged in
+            if (document.getElementById('adminSection').style.display === 'block') {
+                displayOrders();
             }
         }
         
-        // ============ TRACKING FUNCTIONS ============
-        function trackOrder() {
-            const phone = document.getElementById('trackPhone').value;
-            
-            if (!phone) {
-                Swal.fire('Error', 'Please enter phone number', 'error');
-                return;
-            }
-            
-            db.ref('orders').orderByChild('phone').equalTo(phone).once('value', snapshot => {
-                let html = '';
-                
-                if (!snapshot.exists()) {
-                    html = '<p style="text-align: center; padding: 20px;">No orders found</p>';
-                } else {
-                    snapshot.forEach(childSnapshot => {
-                        const order = childSnapshot.val();
-                        const orderId = childSnapshot.key;
-                        
-                        const statusColors = {
-                            'pending': '#ff9800',
-                            'processing': '#2196f3',
-                            'ready': '#4caf50',
-                            'delivered': '#9c27b0'
-                        };
-                        
-                        html += `
-                            <div style="border: 1px solid #ddd; border-left: 5px solid ${statusColors[order.status] || '#ff9800'}; border-radius: 12px; padding: 20px; margin-bottom: 15px;">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                    <h4 style="margin: 0;">Order #${order.trackingNumber}</h4>
-                                    <span style="background: ${statusColors[order.status] || '#ff9800'}; color: white; padding: 5px 12px; border-radius: 50px; font-size: 12px;">
-                                        ${order.status?.toUpperCase() || 'PENDING'}
-                                    </span>
-                                </div>
-                                <p><strong>Items:</strong> ${order.qty}x ${order.weight}kg Chicken</p>
-                                <p><strong>Total:</strong> E${order.total}</p>
-                                <p><strong>Status:</strong> ${order.status || 'pending'}</p>
-                        `;
-                        
-                        if (order.status === 'delivered' && !order.rating) {
-                            html += `<button onclick="openRatingModal('${orderId}')" style="background: #ff9800; margin-top: 10px;">⭐ Rate Order</button>`;
-                        }
-                        
-                        if (order.status === 'ready' && !order.confirmed) {
-                            html += `<button onclick="showConfirmModal('${orderId}')" style="background: #4caf50; margin-top: 10px;">✅ Confirm Delivery</button>`;
-                        }
-                        
-                        html += `</div>`;
-                    });
-                }
-                
-                document.getElementById('trackingResult').innerHTML = html;
-            });
-        }
-        
-        // ============ RATING FUNCTIONS ============
-        function setRating(rating) {
-            currentRating = rating;
-            for (let i = 1; i <= 5; i++) {
-                const star = document.getElementById(`star${i}`);
-                if (star) {
-                    star.style.color = i <= rating ? '#ff9800' : '#ddd';
-                }
-            }
-        }
-        
-        function openRatingModal(orderId) {
-            currentRatingOrderId = orderId;
-            currentRating = 0;
-            setRating(0);
-            document.getElementById('reviewText').value = '';
-            
-            db.ref(`orders/${orderId}`).once('value', snapshot => {
-                const order = snapshot.val();
-                document.getElementById('ratingOrderDetails').innerHTML = `
-                    <strong>Order #${order.trackingNumber}</strong><br>
-                    ${order.qty}x ${order.weight}kg Chicken<br>
-                    Total: E${order.total}
-                `;
-            });
-            
-            document.getElementById('ratingModal').style.display = 'flex';
-        }
-        
-        function submitRating() {
-            if (currentRating === 0) {
-                Swal.fire('Error', 'Please select a rating', 'error');
-                return;
-            }
-            
-            const review = document.getElementById('reviewText').value;
-            
-            db.ref(`orders/${currentRatingOrderId}`).update({
-                rating: currentRating,
-                review: review,
-                ratedAt: new Date().toISOString()
-            }).then(() => {
-                Swal.fire('Thank You!', 'Your review has been submitted', 'success');
-                closeModal('ratingModal');
-                loadReviews();
-            });
-        }
-        
-        // ============ REVIEW FUNCTIONS ============
-        function loadReviews() {
-            db.ref('orders').orderByChild('rating').startAt(1).once('value', snapshot => {
-                let html = '';
-                const reviews = [];
-                
-                snapshot.forEach(childSnapshot => {
-                    const order = childSnapshot.val();
-                    if (order.rating) {
-                        reviews.push(order);
-                    }
-                });
-                
-                reviews.sort((a, b) => b.ratedAt?.localeCompare(a.ratedAt) || 0);
-                
-                if (reviews.length === 0) {
-                    html = '<p style="text-align: center; padding: 20px;">No reviews yet</p>';
-                } else {
-                    reviews.forEach(review => {
-                        const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
-                        html += `
-                            <div style="background: white; border-radius: 12px; padding: 15px; margin-bottom: 15px; border: 1px solid #eee;">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <strong>${review.name}</strong>
-                                    <span style="color: #ff9800;">${stars}</span>
-                                </div>
-                                <p style="margin-top: 10px;">"${review.review || 'No comment'}"</p>
-                                <small style="color: #666;">${new Date(review.ratedAt).toLocaleDateString()}</small>
-                            </div>
-                        `;
-                    });
-                }
-                
-                document.getElementById('reviewsList').innerHTML = html;
-            });
-        }
-        
-        // ============ CONFIRM DELIVERY FUNCTIONS ============
-        function showConfirmModal(orderId) {
-            currentConfirmOrderId = orderId;
-            
-            db.ref(`orders/${orderId}`).once('value', snapshot => {
-                const order = snapshot.val();
-                document.getElementById('confirmOrderDetails').innerHTML = `
-                    <strong>Order #${order.trackingNumber}</strong><br>
-                    ${order.qty}x ${order.weight}kg Chicken<br>
-                    Total: E${order.total}
-                `;
-            });
-            
-            document.getElementById('confirmModal').style.display = 'flex';
-        }
-        
-        function confirmDelivery() {
-            db.ref(`orders/${currentConfirmOrderId}`).update({
-                status: 'delivered',
-                confirmed: true,
-                confirmedAt: new Date().toISOString()
-            }).then(() => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Order Confirmed!',
-                    text: 'Thank you for your purchase!',
-                    confirmButtonText: 'Rate Now'
-                }).then(() => {
-                    closeModal('confirmModal');
-                    openRatingModal(currentConfirmOrderId);
-                });
-            });
-        }
-        
-        // ============ ADMIN AUTHENTICATION ============
+        // Admin functions
         function showAdminLogin() {
-            document.getElementById('adminLoginModal').style.display = 'flex';
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('loginModal').style.display = 'none';
         }
         
         function verifyAdmin() {
-            const password = document.getElementById('adminPassword').value;
-            
-            if (password === ADMIN_PASSWORD) {
-                closeModal('adminLoginModal');
+            const password = document.getElementById('password').value;
+            if (password === 'admin123') {
+                closeModal();
                 document.getElementById('adminSection').style.display = 'block';
-                loadStock(); // Refresh admin stock display
-                loadAllOrders(); // Load orders for admin
-                
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Welcome Admin',
-                    timer: 1500,
-                    showConfirmButton: false
-                });
+                updateStockDisplay();
+                displayOrders();
             } else {
-                Swal.fire('Error', 'Wrong password', 'error');
+                alert('Wrong password');
             }
         }
         
@@ -1262,159 +359,54 @@
             document.getElementById('adminSection').style.display = 'none';
         }
         
-        // ============ ADMIN ORDER MANAGEMENT ============
-        function loadAllOrders() {
-            db.ref('orders').orderByChild('timestamp').once('value', snapshot => {
-                let html = '';
-                let count = 0;
-                
-                if (!snapshot.exists()) {
-                    html = '<p style="text-align: center;">No orders yet</p>';
-                } else {
-                    const orders = [];
-                    snapshot.forEach(childSnapshot => {
-                        orders.push({ key: childSnapshot.key, ...childSnapshot.val() });
-                    });
-                    
-                    orders.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
-                    
-                    orders.forEach(order => {
-                        count++;
-                        const statusColors = {
-                            'pending': '#ff9800',
-                            'processing': '#2196f3',
-                            'ready': '#4caf50',
-                            'delivered': '#9c27b0'
-                        };
-                        
-                        html += `
-                            <div style="border: 1px solid #ddd; border-left: 5px solid ${statusColors[order.status] || '#ff9800'}; border-radius: 12px; padding: 15px; margin-bottom: 15px;">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <h4 style="margin: 0;">#${order.trackingNumber}</h4>
-                                    <span style="background: ${statusColors[order.status] || '#ff9800'}; color: white; padding: 3px 10px; border-radius: 50px; font-size: 12px;">
-                                        ${order.status?.toUpperCase() || 'PENDING'}
-                                    </span>
-                                </div>
-                                <p><strong>👤 ${order.name}</strong> - 📞 ${order.phone}</p>
-                                <p>📦 ${order.qty}x ${order.weight}kg - E${order.total}</p>
-                                <p>📍 ${order.address}</p>
-                                <p>💳 ${order.paymentMethod === 'momo' ? 'MoMo' : 'Cash'}</p>
-                                
-                                <div style="display: flex; gap: 5px; margin-top: 10px;">
-                                    <button onclick="updateOrderStatus('${order.key}', 'processing')" style="flex: 1; padding: 8px; background: #2196f3;">Process</button>
-                                    <button onclick="updateOrderStatus('${order.key}', 'ready')" style="flex: 1; padding: 8px; background: #4caf50;">Ready</button>
-                                    <button onclick="updateOrderStatus('${order.key}', 'delivered')" style="flex: 1; padding: 8px; background: #ff9800;">Deliver</button>
-                                    <button onclick="deleteOrder('${order.key}')" style="flex: 1; padding: 8px; background: #f44336;">Delete</button>
-                                </div>
-                            </div>
-                        `;
-                    });
-                }
-                
-                html = `<p><strong>Total Orders: ${count}</strong></p>` + html;
-                document.getElementById('adminOrdersList').innerHTML = html;
-            });
-        }
-        
-        function updateOrderStatus(orderId, status) {
-            db.ref(`orders/${orderId}`).once('value', snapshot => {
-                const order = snapshot.val();
-                const history = order.statusHistory || [];
-                
-                history.push({
-                    status: status,
-                    timestamp: new Date().toISOString(),
-                    note: `Status changed to ${status}`
-                });
-                
-                db.ref(`orders/${orderId}`).update({
-                    status: status,
-                    statusHistory: history,
-                    lastUpdated: new Date().toISOString()
-                }).then(() => {
-                    Swal.fire('Success', `Order status updated to ${status}`, 'success');
-                    loadAllOrders();
-                });
-            });
-        }
-        
-        function deleteOrder(orderId) {
-            Swal.fire({
-                title: 'Delete Order?',
-                text: 'This cannot be undone!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#f44336',
-                confirmButtonText: 'Delete'
-            }).then(result => {
-                if (result.isConfirmed) {
-                    db.ref(`orders/${orderId}`).remove().then(() => {
-                        Swal.fire('Deleted!', 'Order has been removed', 'success');
-                        loadAllOrders();
-                    });
-                }
-            });
-        }
-        
-        // ============ UTILITY FUNCTIONS ============
-        function switchTab(tab) {
-            const tabs = ['order', 'track', 'reviews'];
-            tabs.forEach(t => {
-                document.getElementById(`${t}Tab`).style.display = 'none';
-            });
+        function addStock() {
+            const size = document.getElementById('addSize').value;
+            const qty = parseInt(document.getElementById('addQty').value);
             
-            document.querySelectorAll('.tab').forEach(t => {
-                t.classList.remove('active');
-            });
-            
-            if (tab === 'order') {
-                document.getElementById('orderTab').style.display = 'block';
-                document.querySelectorAll('.tab')[0].classList.add('active');
-            } else if (tab === 'track') {
-                document.getElementById('trackTab').style.display = 'block';
-                document.querySelectorAll('.tab')[1].classList.add('active');
-            } else if (tab === 'reviews') {
-                document.getElementById('reviewsTab').style.display = 'block';
-                document.querySelectorAll('.tab')[2].classList.add('active');
-                loadReviews();
+            if (!qty || qty < 1) {
+                alert('Enter valid quantity');
+                return;
             }
-        }
-        
-        function setDefaultDates() {
-            const today = new Date();
-            const dateStr = today.toISOString().split('T')[0];
-            const timeStr = today.toTimeString().split(' ')[0].substring(0, 5);
             
-            document.getElementById('payDate').value = dateStr;
-            document.getElementById('payTime').value = timeStr;
+            stock[size].quantity += qty;
+            saveData();
+            updateStockDisplay();
+            alert(`✅ Added ${qty} birds to ${size}kg`);
+            document.getElementById('addQty').value = '';
         }
         
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
+        function adjustStock(change) {
+            const size = document.getElementById('adjustSize').value;
+            const newQty = Math.max(0, stock[size].quantity + change);
+            stock[size].quantity = newQty;
+            saveData();
+            updateStockDisplay();
+            alert(`✅ Stock updated to ${newQty}`);
         }
         
-        // Event Listeners
+        function displayOrders() {
+            let html = '';
+            const recentOrders = orders.slice(0, 5);
+            
+            recentOrders.forEach(order => {
+                html += `<div style="background: white; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 5px solid #ff9800;">
+                            <strong>#${order.tracking}</strong> - ${order.name}<br>
+                            ${order.qty}x ${order.size}kg - E${order.total}<br>
+                            Status: ${order.status}<br>
+                            <small>${order.timestamp}</small>
+                        </div>`;
+            });
+            
+            document.getElementById('ordersList').innerHTML = html || 'No orders yet';
+        }
+        
+        // Event listeners
+        document.getElementById('size').addEventListener('change', updatePrice);
         document.getElementById('quantity').addEventListener('input', updatePrice);
-        document.getElementById('sizeSelect').addEventListener('change', updatePrice);
-        document.getElementById('serviceSelect').addEventListener('change', updatePrice);
-        document.getElementById('typeSelect').addEventListener('change', function() {
-            const serviceSection = document.getElementById('serviceSection');
-            if (this.value === 'full') {
-                serviceSection.style.display = 'block';
-            } else {
-                serviceSection.style.display = 'none';
-                document.getElementById('serviceSelect').value = '0';
-            }
-            updatePrice();
-        });
         
-        // Initialize service section
-        if (document.getElementById('typeSelect').value === 'full') {
-            document.getElementById('serviceSection').style.display = 'block';
-        }
-        
-        console.log("Lusungulo App Ready!");
+        // Initialize
+        loadData();
+        console.log('✅ App ready! No Firebase needed!');
     </script>
 </body>
 </html>
-
